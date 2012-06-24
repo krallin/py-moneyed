@@ -54,10 +54,13 @@ class Money(object):
     ($DEITY forbid) floats.
     """
 
-    def __init__(self, amount=Decimal('0.0'), currency=DEFAULT_CURRENCY_CODE):
+    def __init__(self, amount=Decimal('0.0'), currency=None):
         if not isinstance(amount, Decimal):
             amount = Decimal(str(amount))
         self.amount = amount
+
+        if currency is None:
+            currency = DEFAULT_CURRENCY_CODE
 
         if not isinstance(currency, Currency):
             currency = get_currency(str(currency).upper())
